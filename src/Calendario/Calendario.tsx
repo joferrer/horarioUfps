@@ -1,19 +1,14 @@
 
-import { Box, Card, CardContent, Grid, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Card, CardContent, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid';
+import { CalendarCard } from './CalendarCard';
 
 const semana: string[] = ['','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
 
 export const Calendario = () => {
-    const rows = [
-        { id: 1, col1: 'Hello', col2: 'World' },
-        { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-      ];
 
     const dias = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo'].map((value, index) => ({ field: `col${index + 2}`, headerName: `${value}`, width: 150 }) );
 
-    const columns = [{ field: 'col1', headerName: 'Hora', width: 150 }, ...dias];
 
     const horas :number[] = new Array(25).fill(0);
     
@@ -31,60 +26,52 @@ export const Calendario = () => {
     <div>
         
 
-        <Box sx={{height: '80vh', width: '70vw'  }}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        {
-                            semana.map((dia, index)=>
-                                <TableCell sx={{minWidth:'100px'}} key={`dia ${index}`} align='center'>{`${dia}`}</TableCell>
-                            )
-                        }
-                    </TableRow>
+        <Box sx={{height: '80vh', width: '80vw'  }}>
+            <CalendarCard />
+            <Paper  sx={{ width: '100%' ,height:'100%'}}>
+                <TableContainer  sx={{ width: '100%', height:'100%' }}>
+                    <Table >
+                        <TableHead>
+                            <TableRow>
+                                {
+                                    semana.map((dia, index)=>
+                                        <TableCell sx={{minWidth:'100px', borderRight:'1px solid rgba(224, 224, 224, 1)'}} key={`dia ${index}`} align='center'>{`${dia}`}</TableCell>
+                                    )
+                                }
+                            </TableRow>
 
-                    
-
-                </TableHead>
-
-                <TableBody>
-                        <TableRow>
-                            <TableCell component='th' scope='row' sx={{margin: '0px', }}>0:00</TableCell>
-                            
-                            <TableCell sx={{width:'100px',height:'20px',padding:0,margin:0}}>
-                                <Card 
-                                    sx={{width: '100px',
-                                         padding: '0px',
-                                         height: '106px',
-                                        position: 'absolute',
-                                        top: '125px'}}
-                                    draggable
-                                >
-                                    <CardContent sx={{padding:'5px'}}>
-                                        <Typography variant='subtitle2' >
-                                            Redes de computadoras
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </TableCell >
-                            <TableCell sx={{width:'100px'}} >
-                                <Card>
-
-                                </Card>
-                            </TableCell>
-                            <TableCell/>
-                            <TableCell/>
-                            <TableCell/>
-                            <TableCell/>
-                            <TableCell/>
                             
 
-                        </TableRow>
-                        <TableRow>
-                            <TableCell component='th' scope='row'>0:00</TableCell>
-                            
-                        </TableRow>
-                    </TableBody>
-            </Table>
+                        </TableHead>
+
+                        <TableBody>
+
+                            {
+                                filas.map((fila,index)=>
+                                    <TableRow>
+                                        <TableCell key={`hora:${fila.id}`} component='th' scope='row' sx={{margin: '0px', borderRight:'1px solid rgba(224, 224, 224, 1)' }}>{fila.col1}</TableCell>
+                                        <TableCell sx={{margin: '0px', borderRight:'1px solid rgba(224, 224, 224, 1)' }}>
+                                            
+                                        </TableCell >
+                                        <TableCell sx={{margin: '0px', borderRight:'1px solid rgba(224, 224, 224, 1)' }} >
+                                            
+                                    </TableCell >
+                                    <TableCell sx={{margin: '0px', borderRight:'1px solid rgba(224, 224, 224, 1)' }}/>
+                                    <TableCell sx={{margin: '0px', borderRight:'1px solid rgba(224, 224, 224, 1)' }}/>
+                                    <TableCell sx={{margin: '0px', borderRight:'1px solid rgba(224, 224, 224, 1)' }}/>
+                                    <TableCell sx={{margin: '0px', borderRight:'1px solid rgba(224, 224, 224, 1)' }}/>
+                                    <TableCell />
+                                    
+
+                                    </TableRow>
+                                )
+                            }
+                
+                            </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
+            
         </Box>
     </div>
   )
